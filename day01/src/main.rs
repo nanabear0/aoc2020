@@ -1,10 +1,9 @@
-use std::collections::HashSet;
 use std::fs::File;
 use std::io::{prelude::*, BufReader};
 
 fn main() {
     let reader = BufReader::new(File::open("input.txt").unwrap());
-    let numbers: HashSet<i32> = reader
+    let numbers: Vec<i32> = reader
         .lines()
         .map(|x| x.unwrap().parse::<i32>().unwrap())
         .collect();
