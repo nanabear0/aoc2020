@@ -1,20 +1,21 @@
+use std::collections::HashSet;
 use std::fs::File;
 use std::io::{prelude::*, BufReader};
 
 fn main() {
     let reader = BufReader::new(File::open("input.txt").unwrap());
-    let numbers: Vec<i32> = reader
+    let numbers: HashSet<i32> = reader
         .lines()
         .map(|x| x.unwrap().parse::<i32>().unwrap())
         .collect();
-    'l1: for (i, n1) in numbers.iter().enumerate() {
-        for (j, n2) in numbers.iter().enumerate().skip(i + 1) {
-            for (_, n3) in numbers.iter().enumerate().skip(j + 1) {
-                if n1 + n2 + n3 == 2020 {
-                    println!("{} {} {}, {}", n1, n2, n3, n1 * n2 * n3);
-                    break 'l1;
-                }
-            }
-        }
-    }
+    let result: Option<i32> = numbers.iter().enumerate().find_map(|(i, n2)| {
+        numbers.iter().enumerate().skip(i + 1).find_map(|(j, n1)| {
+            numbers
+                .iter()
+                .skip(j + 1)
+                .find(|x| **x == (2020 - n2 - n1))
+                .map(|k| k * n1 * n2)
+        })
+    });
+    println!("{:?}", result);
 }
