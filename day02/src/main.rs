@@ -41,8 +41,7 @@ fn main() {
     let reader = BufReader::new(File::open("input.txt").unwrap());
     let passwords: Vec<Password> = reader
         .lines()
-        .map(|x| x.unwrap())
-        .map(|x| x.parse().unwrap())
+        .map(|x| x.unwrap().parse().unwrap())
         .collect();
     println!("p1: {:?}", passwords.iter().filter(|p| p.p1()).count());
     println!("p2: {:?}", passwords.iter().filter(|p| p.p2()).count());
