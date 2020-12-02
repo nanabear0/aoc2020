@@ -29,8 +29,8 @@ impl FromStr for Password {
         let re = Regex::new(r"^(\d+)-(\d+) ([a-z]): ([a-z]+)$").unwrap();
         let caps = re.captures(s).unwrap();
         Ok(Password {
-            r: caps[1].parse::<usize>().unwrap(),
-            u: caps[2].parse::<usize>().unwrap(),
+            r: caps[1].parse().unwrap(),
+            u: caps[2].parse().unwrap(),
             c: caps[3].chars().next().unwrap(),
             s: caps[4].to_string(),
         })
