@@ -36,11 +36,7 @@ fn find_trees_on_slope(space: &Vec<Vec<Space>>, slope: &(usize, usize)) -> usize
     space
         .iter()
         .step_by(slope.1)
-        .fold((0, 0), |(pos, total), x| {
-            (
-                pos + slope.0,
-                total + (*x.get(pos % x.len()).unwrap() == Space::Tree) as usize,
-            )
-        })
-        .1
+        .enumerate()
+        .filter(|(i, x)| *x.get((i * slope.0) % x.len()).unwrap() == Space::Tree)
+        .count()
 }
