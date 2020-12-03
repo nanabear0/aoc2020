@@ -30,7 +30,6 @@ fn main() {
             .map(|x| find_trees_on_slope(&space, x))
             .fold(1, |acc, x| x * acc)
     );
-    
 }
 
 fn find_trees_on_slope(space: &Vec<Vec<Space>>, slope: &(usize, usize)) -> usize {
@@ -38,12 +37,10 @@ fn find_trees_on_slope(space: &Vec<Vec<Space>>, slope: &(usize, usize)) -> usize
         .iter()
         .step_by(slope.1)
         .fold((0, 0), |(pos, total), x| {
-            let tree: usize = if *x.get(pos % x.len()).unwrap() == Space::Tree {
-                1
-            } else {
-                0
-            };
-            (pos + slope.0, total + tree)
+            (
+                pos + slope.0,
+                total + (*x.get(pos % x.len()).unwrap() == Space::Tree) as usize,
+            )
         })
         .1
 }
