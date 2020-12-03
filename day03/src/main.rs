@@ -22,9 +22,9 @@ fn main() {
         })
         .collect::<Vec<Vec<Space>>>();
 
-    println!("day01: {:?}", find_trees_on_slope(&space, &(3, 1)));
+    println!("part01: {:?}", find_trees_on_slope(&space, &(3, 1)));
     println!(
-        "day02: {:?}",
+        "part02: {:?}",
         [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
             .iter()
             .map(|x| find_trees_on_slope(&space, x))
