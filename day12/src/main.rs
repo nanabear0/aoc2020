@@ -33,7 +33,7 @@ fn rotate_point(xi: &mut i32, yi: &mut i32, old_angle: &mut i32, angle: i32) {
     *old_angle = (*old_angle + angle + 360) % 360;
 }
 
-fn part2(instructions: &Vec<(char, i32)>) {
+fn part2(instructions: &[(char, i32)]) {
     let mut cur_dir = 0;
     let (mut wx, mut wy) = (10, 1);
     let (mut x, mut y) = (0, 0);
@@ -44,7 +44,7 @@ fn part2(instructions: &Vec<(char, i32)>) {
             'E' => wx += sp,
             'W' => wx -= sp,
             'L' => {
-                rotate_point(&mut wx, &mut wy, &mut cur_dir, 1 * sp);
+                rotate_point(&mut wx, &mut wy, &mut cur_dir, *sp);
             }
             'R' => {
                 rotate_point(&mut wx, &mut wy, &mut cur_dir, -1 * sp);
@@ -59,7 +59,7 @@ fn part2(instructions: &Vec<(char, i32)>) {
     println!("part 2: {}", x.abs() + y.abs());
 }
 
-fn part1(instructions: &Vec<(char, i32)>) {
+fn part1(instructions: &[(char, i32)]) {
     let mut cur_dir = 0;
     let (mut x, mut y) = (0, 0);
     for (dir, sp) in instructions {

@@ -24,7 +24,7 @@ fn part2(target: usize) {
         if buffer_sum == target && buffer.len() >= 2 {
             break 'l;
         } else {
-            while buffer_sum > target && buffer.len() > 0 {
+            while buffer_sum > target && !buffer.is_empty() {
                 buffer_sum -= buffer.pop_back().unwrap();
                 if buffer_sum == target && buffer.len() >= 2 {
                     break 'l;
@@ -51,18 +51,16 @@ fn part1() -> Option<usize> {
     {
         if buffer.len() < 25 {
             buffer.push_front(s);
+        } else if buffer
+            .iter()
+            .enumerate()
+            .any(|(i, x)| buffer.iter().skip(i).any(|y| x + y == s))
+        {
+            buffer.push_front(s);
+            buffer.pop_back();
         } else {
-            if buffer
-                .iter()
-                .enumerate()
-                .any(|(i, x)| buffer.iter().skip(i).any(|y| x + y == s))
-            {
-                buffer.push_front(s);
-                buffer.pop_back();
-            } else {
-                println!("part1: {}", s);
-                return Option::Some(s);
-            }
+            println!("part1: {}", s);
+            return Option::Some(s);
         }
     }
     println!("part1 borken");

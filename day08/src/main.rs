@@ -43,11 +43,12 @@ fn main() {
     part2(&instructions);
 }
 
-fn part2(instructions: &Vec<Ins>) {
-    for (itc, _) in instructions.iter().enumerate().filter(|(_, x)| match x {
-        Ins::Jmp(_) | Ins::Nop(_) => true,
-        _ => false,
-    }) {
+fn part2(instructions: &[Ins]) {
+    for (itc, _) in instructions
+        .iter()
+        .enumerate()
+        .filter(|(_, x)| matches!(x, Ins::Jmp(_) | Ins::Nop(_)))
+    {
         let (mut acc, mut pc) = (0, 0);
         let mut visited_instructions: HashSet<i32> = HashSet::new();
 
@@ -86,7 +87,7 @@ fn part2(instructions: &Vec<Ins>) {
     }
 }
 
-fn part1(instructions: &Vec<Ins>) {
+fn part1(instructions: &[Ins]) {
     let (mut acc, mut pc) = (0, 0);
     let mut visited_instructions: HashSet<i32> = HashSet::new();
 

@@ -15,7 +15,7 @@ fn part2() {
         .lines()
         .map(|s| s.unwrap().parse::<usize>().unwrap())
         .collect::<Vec<usize>>();
-    chargers.sort();
+    chargers.sort_unstable();
     chargers.push(chargers.last().unwrap() + 3);
     let target = chargers.last().unwrap() + 3;
     let mut map = HashMap::new();
@@ -25,7 +25,7 @@ fn part2() {
 fn paths_from_to(
     start: usize,
     target: usize,
-    chargers: &Vec<usize>,
+    chargers: &[usize],
     map: &mut HashMap<usize, usize>,
 ) -> usize {
     if let Some(c) = map.get(&start) {
@@ -56,7 +56,7 @@ fn part1() {
     let my_charger = chargers.iter().max().unwrap() + 3;
     chargers.push(my_charger);
     chargers.push(0);
-    chargers.sort();
+    chargers.sort_unstable();
 
     let (x1, x3) = chargers
         .windows(2)
